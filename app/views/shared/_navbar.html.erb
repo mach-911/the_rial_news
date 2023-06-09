@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg bg-info bg-gradient shadow">
+  <div class="container">
+    <%= link_to("The rial news", root_path, class: "navbar-brand") %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <div class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <%= link_to("link", "#", class: "nav-link", aria: {current: "page"}) %>
+        <li class="nav-item dropdown">
+          <%= link_to(user_signed_in?? 
+            "Hola #{current_user.email}" 
+            : "Debes registrarte", "#", 
+            class: "nav-link dropdown-toggle", 
+              data: {bs_toggle: "dropdown"}, 
+              aria_expanded: false) %>
+              <div class="dropdown-menu">
+                <% if user_signed_in? %>
+                  <%= button_to 'Cerrar sesión', destroy_user_session_path, class: 'dropdown-item', method: :delete %>
+                <% else %>
+                  <%= link_to 'Iniciar sesión', new_user_session_path, class: 'dropdown-item'%>
+                  <hr class="dropdown-divider">
+                  <%= link_to 'Registro', new_user_registration_path, class: 'dropdown-item'%>
+                <% end %>
+              </div>
+            </li>
+          </div>
+        </div>
+      </div>
+    </nav>
