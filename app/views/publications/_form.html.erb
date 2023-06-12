@@ -1,4 +1,4 @@
-<%= form_with(model: publication) do |form| %>
+<%= form_with(model: publication, class: "card p-3", :html => {:style=> "width: 500px;"}) do |form| %>
   <% if publication.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(publication.errors.count, "error") %> prohibited this publication from being saved:</h2>
@@ -12,21 +12,14 @@
   <% end %>
 
   <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
+    <%= form.label :title, "Título", style: "display: block" %>
+    <%= form.text_field :title, class:"form-control" %>
   </div>
-
   <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+    <%= form.label :description, "Descripción", style: "display: block" %>
+    <%= form.text_area :description, class:"form-control" %>
   </div>
-
   <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <%= form.submit "Crear publicación", class:"btn btn-primary my-3" %>
   </div>
 <% end %>

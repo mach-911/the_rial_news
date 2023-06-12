@@ -1,0 +1,13 @@
+<article>
+	<p><%= comment.content %></p>
+	<small>Por: <strong><%= comment.user.name %></strong></small>
+	<% if current_user.present? %>
+		<% if current_user.role == "admin" %>
+		   <%= link_to "Eliminar comentario", [@publication, comment], data: {
+                      turbo_method: :delete,
+                      turbo_confirm: "Seguro eliminar comentario?"
+                    } %>
+		<% end %>
+	<% end %>
+</article>
+<hr>

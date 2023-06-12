@@ -4,5 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  enum :role, [:normal_user, :admin]
   has_many :publications
+  has_many :comments
 end

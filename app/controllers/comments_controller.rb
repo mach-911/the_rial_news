@@ -1,21 +1,40 @@
 class CommentsController < ApplicationController
+
+	before_action only: [:destroy] do
+		authorized_request(["admin"])
+	end
+
 	def create
 		@comment = current_user.comments.new(comment_params)
-		if !@comment.save
+		@comment.publication_id = params[:publication_id]
 
-			puts "=============#{ @comment} =============="
-			puts "#{params[:id]}"
-			flash[:notice] = @comment.errors.full_messages.to_sentence
+    	respond_to do |format|
+     	if @comment.save
+          format.html { redirect_to publication_path(params[:publication_id]), notice: "Comentario creado correctamente." }
+      	else
+        	format.html { render publication_path(params[:publication_id]), status: :unprocessable_entity }
+        	format.json { render json: @comment.errors, status: :unprocessable_entity }
+        end
+      end
+		
+	end
+
+	def destroy
+		@publication = Publication.find(params[:publication_id])
+		@comment = @publication.comments.find(params[:id])
+		@comment.destroy
+
+		respond_to do |format|
+			format.html { redirect_to publication_path(@publication), notice: "Comentario borrado" }
+			format.json { head :no_content }
 		end
-		redirect_to publications_path			
 	end
 
 	private
 
 	def comment_params
-		params
-			.require(:comment)
-			.permit(:content)
-			.merge(publication_id: params[:id])
+		params.require(:comment).permit(:content)
 	end
+
+
 end

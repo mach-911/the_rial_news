@@ -14,7 +14,10 @@
  *= require_self
  */
 $theme-colors: (
-	'info': tomato
+	'info': tomato,
+	'primary': #da2,
+	'danger': #f34,
+	'light': #fdf
 ); 
 
 @import "bootstrap";

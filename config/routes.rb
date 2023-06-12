@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :publications
+  resources :publications do
+  	resources :comments, only: [:create, :destroy]
+  end
   devise_for :users
-  root "home#index"
+  root "publications#index"
 end

@@ -2,9 +2,19 @@
 
 <%= render @publication %>
 
-<div>
-  <%= link_to "Edit this publication", edit_publication_path(@publication) %> |
-  <%= link_to "Back to publications", publications_path %>
+<p>
+	<strong>Comentarios</strong>
+	<%= render @publication.comments %>
+	<%= render partial: 'comments/form', locals: { publication: @publication } %>
+</p>
 
-  <%= button_to "Destroy this publication", @publication, method: :delete %>
+<div>
+	<% if current_user.present? %>
+		<% if current_user.role == "admin" %>
+		  <%= link_to "Editar publicación", edit_publication_path(@publication) %> |
+		  <%= link_to "Volver a publicaciones", publications_path %>
+
+		  <%= button_to "Eliminar esta publicación", @publication, method: :delete, class: "btn btn-danger" %>
+		<% end %>
+	<% end %>
 </div>

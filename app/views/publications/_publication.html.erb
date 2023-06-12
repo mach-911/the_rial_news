@@ -1,17 +1,19 @@
-<div id="<%= dom_id publication %>">
-  <p>
-    <strong>User:</strong>
-    <%= publication.user_id %>
-  </p>
-
-  <p>
-    <strong>Title:</strong>
-    <%= publication.title %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= publication.description %>
-  </p>
-
+<div id="<%= dom_id publication %>" class="card">
+  <div class="card-body">
+    <ul class="list-group">
+      <li class="list-group-item">
+        <strong>Título:</strong>
+        <%= publication.title %>
+      </li>
+      <li class="list-group-item">
+        <strong>Descripción:</strong>
+        <%= publication.description %>
+      </li>
+      <li class="list-group-item">
+        <strong>Creador por:</strong>
+        <%= User.find(publication.user_id).name %>
+      </li>
+    </ul>
+  </div>
 </div>
+

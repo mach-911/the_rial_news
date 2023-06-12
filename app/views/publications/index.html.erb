@@ -1,14 +1,15 @@
-<p style="color: green"><%= notice %></p>
+<div class="<%= notice ? 'alert alert-info': '' %>" role="alert"><%= notice %></div>
 
-<h1>Publications</h1>
+<h1>Noticias</h1>
 
-<div id="publications">
+<div id="publications" class="row">
   <% @publications.each do |publication| %>
+  <div class="col-10 col-md-6 col-lg-4">
+   <%= link_to publication, class: "text-decoration-none" do %>
     <%= render publication %>
-    <p>
-      <%= link_to "Show this publication", publication %>
-    </p>
+    <% end %>
+  </div>
   <% end %>
 </div>
 
-<%= link_to "New publication", new_publication_path %>
+<%= link_to("Nueva publicación", new_publication_path, class: 'btn btn-primary my-3') %>
