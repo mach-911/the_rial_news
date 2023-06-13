@@ -1,20 +1,17 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @publication %>
-
-<p>
-	<strong>Comentarios</strong>
-	<%= render @publication.comments %>
-	<%= render partial: 'comments/form', locals: { publication: @publication } %>
-</p>
-
 <div>
 	<% if current_user.present? %>
-		<% if current_user.role == "admin" %>
-		  <%= link_to "Editar publicación", edit_publication_path(@publication) %> |
-		  <%= link_to "Volver a publicaciones", publications_path %>
+	<% if current_user.role == "admin" %>
+	<%= link_to "Editar publicación", edit_publication_path(@publication) %> |
+	<%= link_to "Volver a publicaciones", publications_path %>
 
-		  <%= button_to "Eliminar esta publicación", @publication, method: :delete, class: "btn btn-danger" %>
-		<% end %>
+	<%= button_to "Eliminar esta publicación", @publication, method: :delete, class: "btn btn-danger" %>
+	<% end %>
 	<% end %>
 </div>
+<h3>Comentarios</h3>
+<%= render @publication.comments %>
+<%= render partial: 'comments/form', locals: { publication: @publication } %>
+

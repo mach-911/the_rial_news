@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-
+	before_action :authenticate_user!, only: [:create]
 	before_action only: [:destroy] do
 		authorized_request(["admin"])
 	end
