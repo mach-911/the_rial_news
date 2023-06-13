@@ -1,10 +1,11 @@
-# fly.toml app configuration file generated for the-rial-news on 2023-06-12T05:39:17-04:00
+# fly.toml app configuration file generated for the-rial-news on 2023-06-13T01:33:11-04:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
 app = "the-rial-news"
 primary_region = "scl"
+kill_signal = "SIGTERM"
 console_command = "/rails/bin/rails console"
 
 [http_service]
@@ -17,6 +18,3 @@ console_command = "/rails/bin/rails console"
 [[statics]]
   guest_path = "/rails/public"
   url_prefix = "/"
-
-[env]
-  admin =  "administrador@admin.com"
